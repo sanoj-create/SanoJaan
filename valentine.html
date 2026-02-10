@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Be My Valentine 💖</title>
+
+  <!-- WhatsApp Preview -->
+  <meta property="og:title" content="💘 A Special Question Just for You 💘">
+  <meta property="og:description" content="Someone wants to ask you something very special… ❤️">
+  <meta property="og:type" content="website">
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .card {
+      background: white;
+      padding: 45px;
+      border-radius: 25px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+      z-index: 10;
+      max-width: 350px;
+    }
+
+    h1 {
+      color: #ff2e63;
+      margin-bottom: 15px;
+    }
+
+    p {
+      color: #444;
+      font-size: 17px;
+      margin-bottom: 25px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s;
+      position: relative;
+    }
+
+    .yes {
+      background: #ff2e63;
+      color: white;
+    }
+
+    .yes:hover {
+      transform: scale(1.1);
+    }
+
+    .no {
+      background: #ddd;
+      color: black;
+      position: absolute;
+    }
+
+    .heart {
+      position: absolute;
+      color: red;
+      animation: floatUp 4s linear forwards;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-10vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="music" loop>
+    <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="card" id="card">
+    <h1>Will you be my Valentine? 💍💖</h1>
+    <p>
+      From the moment you came into my life,<br>
+      everything felt brighter, warmer, better.<br><br>
+      So tell me… will you make me the happiest person today? 🥹❤️
+    </p>
+
+    <button class="yes" onclick="yesClicked()">Yes ❤️</button>
+    <button class="no" id="noBtn">No 💔</button>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const music = document.getElementById("music");
+
+    noBtn.addEventListener("mouseover", moveButton);
+
+    function moveButton() {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 100);
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    function yesClicked() {
+      music.play();
+
+      document.getElementById("card").innerHTML = `
+        <h1>You said YES 😍💖</h1>
+        <p>
+          My heart is officially yours 💕<br>
+          This just became my favorite moment ever.
+        </p>
+      `;
+
+      setInterval(createHeart, 120);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerHTML = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = (20 + Math.random() * 35) + "px";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 4000);
+    }
+  </script>
+
+</body>
+</html>
